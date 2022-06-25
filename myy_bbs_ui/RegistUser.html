@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./lib/axios.js"></script>
+    <script src="./lib/vue.js"></script>
+    <script src="./lib/elementui.js"></script>
+    <link rel="stylesheet" href="./lib/elementui.css">
+</head>
+
+<body>
+    <div id="registPage">
+        <div class="regist-pad">
+            <h2>用户注册</h2>
+            <el-input v-model="userName" placeholder="请输入用户名"></el-input>
+            <el-input v-model="userNo" placeholder="请输入用户账号"></el-input>
+            <el-input v-model="password" placeholder="请输入登陆密码"></el-input>
+            <el-input v-model="password2" placeholder="请输入登陆密码"></el-input>
+            <el-button type="primary" @click="regist">注册用户</el-button>
+        </div>
+
+
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#registPage",
+            data: {
+                userName: "",
+                userNo: "",
+                password: "",
+                password2: ""
+            },
+            mounted() {
+
+                var userInfo =localStorage.getItem("userInfo");
+                this.userNo = userInfo.userNo;
+                this.userName=userInfo.userName;
+                this.password = userInfo.password;
+      },
+            methods: {
+                regist: function () {
+               
+                    // axios.post(
+                    //     "http://localhost:5265/login/test",
+                    //     {
+                    //         id: this.userName,
+                    //     }).then(function (res) {
+                    //         console.log(res);
+                    //     })
+              
+                    axios.post(
+                        "http://localhost:5265/Login/Insert",
+                        {
+                            userName: this.userName,
+                            userNo: this.userNo,
+                            password: this.password
+                        }).then(function (res) {
+                            history.go(-1);
+                        })
+                        
+                }
+            },
+        })
+    </script>
+    <style>
+        .regist-pad {
+            width: 600px;
+            padding: 20px;
+            margin: auto;
+            margin-top: 10%;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-shadow: 0 0 10px #ccc;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .el-input {
+            margin-bottom: 20px;
+        }
+
+        .el-button {
+            width: 100%;
+        }
+    </style>
+</body>
+
+</html>
