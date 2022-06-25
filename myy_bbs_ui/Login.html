@@ -67,9 +67,10 @@
                 var remMe = this.remMe;
                
 
-                axios.get(`http://localhost:5000/Login/${userNo}/${pwd}/`).then(function (res) {
+                axios.get("http://localhost:5265/Login/GetLoginRes?userNo="+userNo+"&password="+pwd).then(function (res) {
                     localStorage["token"] = res.data.token;
                     sessionStorage['username'] = res.data.userName;
+                    sessionStorage['userId'] = res.data.userId;
                     localStorage["isRem"] = remMe;
                     if (remMe) {
                         userInfo.userNo = userNo;
