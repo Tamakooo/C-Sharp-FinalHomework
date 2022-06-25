@@ -34,45 +34,48 @@
         var vm = new Vue({
             el: "#registPage",
             data: {
-                userId:"",
+                userId:0,
                 userName: "",//图书名
                 userNo: "",//图书种类
                 password: "",//书籍描述
-                up:sessionStorage["username"],//获取当前用户
+                up:"",//获取当前用户
                
             },
-            mounted() {
-
-                var userInfo =localStorage.getItem("userInfo");
-                this.userId = userInfo.userId;
-                
-                    },
+            mounted(){
+                userId = sessionStorage.getItem("userId")
+            },
             methods: {
                 regist: function () {
-                    this.$notify({
-                    title: '成功',
-                    message: '这是一条成功的提示消息',
-                    type: 'success'
-                });
-                    
                 axios.post(
-                        "http://localhost:5000/login",
+                        "http://localhost:5265/Book/Insert",
                         {
                             BookName: this.userName,
-                            description: this.password,//书记描述
-                            type: this.userNo,    //种类
-                            userId: this.userId
+                            //description: this.password,//描述
+                            //type: this.userNo,    //种类
+                            UserId: this.userId,
                         }).then(function (res) {
                             console.log(res);
-                        })
+                            sleep(100)
+                            history.go(-1);
+                        });
+                        this.$alert('这是一段内容');
+                        this.$notify({
+                        title: '成功',
+                        message: '上传成功',
+                        type: 'success' 
+                        
+                });
 
-                
-                
-                
-                location.href = "postlist.html";
                 },
                 post: function () {
-                    
+                    axios.post(
+                        "http://localhost:5265/Book/Insert",
+                        {
+                            BookName: this.userName,
+                            //description: this.password,//描述
+                            //type: this.userNo,    //种类
+                            UserId: this.userId,
+                        })
                     this.$message('上传成功,可以继续上传');
                     this.userNo = '';
                     this.userName='';

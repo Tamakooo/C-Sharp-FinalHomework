@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="./lib/vue.js"></script>
+    <script src="./lib/axios.js"></script>
     <script src="./lib/elementui.js"></script>
     <link rel="stylesheet" href="./lib/elementui.css">
 </head>
@@ -48,99 +49,61 @@
             <el-button type="primary" @click="post"v-else>上传图书</el-button>
 
         </div>
-        <!-- <!-- <div class="post-list">
-            <table>
-                <thead>
-                    <tr>
-                        <td colspan="2">
-                            <span>全部主题</span>
-                            <span>最新</span>
-                            <span>热门</span>
-                            <span>热帖</span>
-                            <span>精华</span>
-                        </td>
-                        <td>作者</td>
-                        <td>回复/查看</td>
-                        <td>最后发表</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td style="width: 32px;padding-left: 5px;">
-                            <img src="./assets/images/folder_new.gif" alt="">
-                        </td>
-                        <td>
-                            <span><a class="post-type" href="javascript:;">[书籍类型]</a></span>
-                            <a href="./PostDetail.html">书籍名字</a>
-                        </td>
-                        <td style="width: 135px;">
-                            <p>发帖人</p>
-                            <p>2022-5-23 22:11:43</p>
-                        </td>
-                        <td style="width: 66px;">
-                            <p>996</p>
-                            <p>1007</p>
-                        </td>
-                        <td style="width: 120px;">
-                            <p>回帖人</p>
-                            <p> 2022年5月23日23:35:17</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 32px;padding-left: 5px;">
-                            <img src="./assets/images/folder_new.gif" alt="">
-                        </td>
-                        <td><span>[书籍类型]</span>书籍名字</td>
-                        <td style="width: 135px;">
-                            <p>发帖人</p>
-                            <p>2022-5-23 22:11:43</p>
-                        </td>
-                        <td style="width: 66px;">
-                            <p>996</p>
-                            <p>1007</p>
-                        </td>
-                        <td style="width: 120px;">
-                            <p>回帖人</p>
-                            <p> 2022年5月23日23:35:17</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 32px;padding-left: 5px;">
-                            <img src="./assets/images/folder_new.gif" alt="">
-                        </td>
-                        <td><span>[书籍类型]</span>书籍名字</td>
-                        <td style="width: 135px;">
-                            <p>发帖人</p>
-                            <p>2022-5-23 22:11:43</p>
-                        </td>
-                        <td style="width: 66px;">
-                            <p>996</p>
-                            <p>1007</p>
-                        </td>
-                        <td style="width: 120px;">
-                            <p>回帖人</p>
-                            <p> 2022年5月23日23:35:17</p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div> -->
+
+        <el-table
+            :key="randomKey"
+            :data="books"
+            border
+            style="width: 100%">
+            <el-table-column
+            prop="userId"
+            label="上传用户"
+            width="180"
+            height="800">
+            </el-table-column>
+            <el-table-column
+            prop="bookName"
+            label="图书名字"
+            width="180">
+            </el-table-column>
+            <el-table-column
+            prop="isLend"
+            label="图书种类">
+    </el-table-column>
+  </el-table>
+
         <div class="post-page">
             <el-pagination background layout="prev, pager, next" :page-size="60" :total="1000">
             </el-pagination>
         </div>
-    </div>
+    </div> -->
 
 </body>
 <script>
     new Vue({
         el: "#postList",
         data:{
+            
             userName:sessionStorage["username"],
             searchName:"",
-            books:JSON.parse(axios.get("http://localhost:5265/Book/GetAll".data)),  //得到书籍列表
-      
+            randomKey:"0",
+            books:[],
+            book:[]
+                
+            
+        
         },
+       
+        mounted(){       
+            console.log(JSON.parse(JSON.stringify(this.books)));
+            axios.get("http://localhost:5265/Book/GetAll").then(function(res){
+                localStorage["books"] = res.data;
+            })
+            this.books= localStorage.getItem("books");
+            console.log(books)
+            
+        },
+        
         methods: {
             logout:function(){
                 localStorage.clear();
@@ -148,12 +111,15 @@
                 this.userName = null;
             },
             refuse:function(){
-                this.$message('请先登录');
-            },
+                this.$message('请先登录');        
+                console.log(books)
+                this.randomKey= Math.random();
+                console.log(this.randomKey)
+            
+            },  
             
             post:function(){
                 location.href = "Postbook.html";
-
             }
         },
     })
