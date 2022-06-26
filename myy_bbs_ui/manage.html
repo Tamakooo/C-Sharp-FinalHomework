@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    <script src="./lib/axios.js"></script>
+    <script src="./lib/elementui.js"></script>
+    <link rel="stylesheet" href="./lib/elementui.css">
+</head>
+
+<body>
+    <div id="postList">
+        <h2 style="text-align: center;">管理自己的书</h2>
+        <el-table :data="books3" style="width: 100%  margin:20px" border>
+            <el-table-column type="expand">
+                <template slot-scope="props">
+                    <el-form label-position="left" inline class="demo-table-expand">
+                        <el-form-item label="上传用户">
+                            <span>{{ props.row.userId }}</span>
+                        </el-form-item>
+                        <el-form-item label="书籍名字">
+                            <span>{{ props.row.bookName }}</span>
+                        </el-form-item>
+                        <el-form-item label="书籍种类">
+                            <span>{{ props.row.category }}</span>
+                        </el-form-item>
+                        <el-form-item label="书籍描述">
+                            <span>{{ props.row.comment }}</span>
+                        </el-form-item>
+                    </el-form>
+                </template>
+            </el-table-column>
+
+
+            <el-table-column prop="userId" label="上传用户" width="180" height="800">
+            </el-table-column>
+            <el-table-column prop="bookName" label="图书名字" width="180">
+            </el-table-column>
+            <el-table-column prop="category" label="图书种类">
+            </el-table-column>
+            <el-table-column align="right">
+                <template slot-scope="scope">
+                    <el-button type="danger" size="mini" @click="handleEdit(scope.$index, scope.row)">删除
+                    </el-button>
+                    <el-button  size="mini" @click="handleback(scope.$index, scope.row)">归还    
+                </el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+
+    </div>
+
+</body>
+<script>
+    new Vue({
+        el: "#postList",
+        data: {
+            userId: localStorage["userId"],
+            isLend: true,
+            bookName: localStorage["bookName"],
+            randomKey: "0",
+            books3: [
+                {
+                    "id": 1,
+                    "bookName": "操作系统",
+                    "type": "课本",
+                    "isLend": false,
+                    "userId": 1
+                },
+                {
+                    "id": 2,
+                    "type": "课本",
+                    "type": "课本",
+                    "bookName": "计算机网络",
+                    "isLend": false,
+                    "userId": 1
+                },
+            ],
+            search: ''
+
+        },
+
+        mounted() {
+
+            axios.get("http://localhost:5265/Book/GetBookByUser?userId=" + this.userId).then(function (res) {
+                localStorage.setItem("books3", JSON.stringify(res.data))
+                console.log(res.data)
+
+            })
+            this.books3 = JSON.parse(localStorage.getItem("books3"))
+        },
+
+        
+        methods: {
+            handleEdit(index, row) {
+                console.log(row.id);
+                axios.delete(
+                    "http://localhost:5265/Book/Remove?id=" + row.id).then(function () {
+
+                    })
+            },
+            handleback(index,row){
+                axios.put(
+                    "http://localhost:5265/Book/Back?name=" + row.bookName).then(function () {
+
+                    })
+            }
+
+        },
+    })
+</script>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .post-list {
+        width: 98%;
+        margin: 16px auto;
+        border: 1px solid #ccc;
+        border-bottom: 0 none;
+    }
+
+    .post-list table {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .post-list table thead tr td {
+        background-color: #eee;
+        height: 40px;
+    }
+
+    .post-list table thead tr td span {
+        margin-left: 16px;
+        color: rgb(0, 102, 255);
+    }
+
+    .post-list table tr td {
+        border-bottom: 1px solid #ccc;
+        height: 40px;
+    }
+
+    .post-list table tr td span {
+        color: rgb(0, 102, 255);
+        padding-right: 10px;
+    }
+
+    .post-list table tr td p:last-child {
+        color: #999;
+    }
+
+    .post-page {
+        text-align: right;
+        margin-bottom: 36px;
+    }
+
+    .demo-table-expand {
+        font-size: 0;
+    }
+
+    .demo-table-expand label {
+        width: 90px;
+        color: #99a9bf;
+    }
+
+    .demo-table-expand .el-form-item {
+        margin-right: 0;
+        margin-bottom: 0;
+        width: 50%;
+    }
+</style>
+
+</html>

@@ -14,7 +14,7 @@
 
 <body>
     <script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
-		<script src="https://cdn.bootcss.com/qs/6.7.0/qs.min.js"></script>
+    <script src="https://cdn.bootcss.com/qs/6.7.0/qs.min.js"></script>
 
 
     <div id="registPage">
@@ -22,10 +22,11 @@
             <h2>上传图书</h2>
             <el-input v-model="userName" placeholder="请输入图书名"></el-input>
             <el-input v-model="userNo" placeholder="请输入图书种类"></el-input>
-            <el-input v-model="password" placeholder="简要描述书籍，并给出联系方式"type="textarea"rows="9"></el-input>
-            <el-button type="primary" @click="regist"style="text-align:center">点击上传上传图书<i class="el-icon-upload el-icon--right"></i></el-button>
-            <el-button  @click="post">继续上传</el-button>
-             
+            <el-input v-model="password" placeholder="简要描述书籍，并给出联系方式" type="textarea" rows="9"></el-input>
+            <el-button type="primary" @click="regist" style="text-align:center">点击上传上传图书<i
+                    class="el-icon-upload el-icon--right"></i></el-button>
+            <el-button @click="post">继续上传</el-button>
+
         </div>
 
 
@@ -34,50 +35,47 @@
         var vm = new Vue({
             el: "#registPage",
             data: {
-                userId:"",
+                userId: 12,
                 userName: "",//图书名
                 userNo: "",//图书种类
                 password: "",//书籍描述
-                up:sessionStorage["username"],//获取当前用户
-               
+
             },
             mounted() {
-
-                var userInfo =localStorage.getItem("userInfo");
-                this.userId = userInfo.userId;
-                
-                    },
+                userId = sessionStorage.getItem("userId")
+            },
             methods: {
                 regist: function () {
-                    this.$notify({
-                    title: '成功',
-                    message: '这是一条成功的提示消息',
-                    type: 'success'
-                });
-                    
-                axios.post(
-                        "http://localhost:5000/login",
+                    axios.post(
+                        "http://localhost:5265/Book/Insert",
                         {
                             BookName: this.userName,
-                            description: this.password,//书记描述
-                            type: this.userNo,    //种类
-                            userId: this.userId
+                            UserId: this.userId,
+                            IsLend: false,
+                            Category: this.userNo,
+                            Comment: this.password
                         }).then(function (res) {
-                            console.log(res);
-                        })
+                            console.log(res); history.go(-1);
+                        });
 
-                
-                
-                
-                location.href = "postlist.html";
                 },
                 post: function () {
-                    
-                    this.$message('上传成功,可以继续上传');
-                    this.userNo = '';
-                    this.userName='';
-                    this.password = '';
-            
+                    axios.post(
+                        "http://localhost:5265/Book/Insert",
+                        {
+                            BookName: this.userName,
+                            IsLend: false,
+                            Comment: this.password,//描述
+                            Category: this.userNo,    //种类
+                            UserId: this.userId,
+                        }).then(f => {
+                            this.$message('上传成功,可以继续上传');
+                            this.userNo = '';
+                            this.userName = '';
+                            this.password = '';
+                        })
+
+
                 }
             },
         })
@@ -107,7 +105,6 @@
             width: 100%;
             margin: 10px;
         }
-  
     </style>
 </body>
 

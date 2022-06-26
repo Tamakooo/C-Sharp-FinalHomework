@@ -36,7 +36,7 @@
     </div>
 </body>
 <script>
- 
+
 
     var vm = new Vue({
         el: "#loginPage",
@@ -46,31 +46,32 @@
             remMe: false,
         },
         mounted() {
-          
-            
-            var userInfo =localStorage.getItem("userInfo")
-            
-            var userInfo =JSON.parse(localStorage["userInfo"]) ;
-           
+
+
+            var userInfo = localStorage.getItem("userInfo")
+
+            var userInfo = JSON.parse(localStorage["userInfo"]);
+
             this.userNo = userInfo.userNo;
             this.password = userInfo.password;
-            this.remMe =  localStorage["isRem"]=="true"?true:false;
+            this.remMe = localStorage["isRem"] == "true" ? true : false;
         },
         methods: {
             login: function () {
                 var userInfo = {
-                    userNo:"",
-                    password:""
+                    userNo: "",
+                    password: ""
                 };
                 var userNo = this.userNo;
                 var pwd = this.password;
                 var remMe = this.remMe;
-               
 
-                axios.get("http://localhost:5265/Login/GetLoginRes?userNo="+userNo+"&password="+pwd).then(function (res) {
+
+                axios.get("http://localhost:5265/Login/GetLoginRes?userNo=" + userNo + "&password=" + pwd).then(function (res) {
                     localStorage["token"] = res.data.token;
-                    sessionStorage['username'] = res.data.userName;
-                    sessionStorage['userId'] = res.data.userId;
+                    sessionStorage["username"] = res.data.userName;
+                    sessionStorage["userId"] = res.data.id;
+                    localStorage["userId"] = res.data.id;
                     localStorage["isRem"] = remMe;
                     if (remMe) {
                         userInfo.userNo = userNo;
