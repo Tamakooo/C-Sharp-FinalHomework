@@ -51,19 +51,12 @@
                         {
                             BookName: this.userName,
                             UserId: this.userId,
+                            IsLend: false,
                             Category: this.userNo,
                             Comment: this.password
                         }).then(function (res) {
-                            console.log(res);
-                            history.go(-1);
+                            console.log(res); history.go(-1);
                         });
-                    this.$alert('这是一段内容');
-                    this.$notify({
-                        title: '成功',
-                        message: '上传成功',
-                        type: 'success'
-
-                    });
 
                 },
                 post: function () {
@@ -71,14 +64,17 @@
                         "http://localhost:5265/Book/Insert",
                         {
                             BookName: this.userName,
-                            //description: this.password,//描述
-                            //type: this.userNo,    //种类
+                            IsLend: false,
+                            Comment: this.password,//描述
+                            Category: this.userNo,    //种类
                             UserId: this.userId,
+                        }).then(f => {
+                            this.$message('上传成功,可以继续上传');
+                            this.userNo = '';
+                            this.userName = '';
+                            this.password = '';
                         })
-                    this.$message('上传成功,可以继续上传');
-                    this.userNo = '';
-                    this.userName = '';
-                    this.password = '';
+
 
                 }
             },

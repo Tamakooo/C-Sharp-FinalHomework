@@ -36,11 +36,11 @@
             },
             mounted() {
 
-                var userInfo =localStorage.getItem("userInfo");
+                var userInfo = localStorage.getItem("userInfo");
                 this.userNo = userInfo.userNo;
-                this.userName=userInfo.userName;
+                this.userName = userInfo.userName;
                 this.password = userInfo.password;
-      },
+            },
             methods: {
                 regist: function () {
                     axios.post(
@@ -52,7 +52,7 @@
                         }).then(function (res) {
                             history.go(-1);
                         })
-                        
+
                 }
             },
         })
