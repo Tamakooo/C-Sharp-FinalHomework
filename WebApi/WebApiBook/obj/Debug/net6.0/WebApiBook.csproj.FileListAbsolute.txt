@@ -1,0 +1,7 @@
+D:\C#\WebApi\WebApiBook\obj\Debug\net6.0\WebApiBook.csproj.AssemblyReference.cache
+D:\C#\WebApi\WebApiBook\obj\Debug\net6.0\WebApiBook.GeneratedMSBuildEditorConfig.editorconfig
+D:\C#\WebApi\WebApiBook\obj\Debug\net6.0\WebApiBook.AssemblyInfoInputs.cache
+D:\C#\WebApi\WebApiBook\obj\Debug\net6.0\WebApiBook.AssemblyInfo.cs
+D:\C#\WebApi\WebApiBook\obj\Debug\net6.0\WebApiBook.csproj.CoreCompileInputs.cache
+D:\C#\WebApi\WebApiBook\obj\Debug\net6.0\WebApiBook.MvcApplicationPartsAssemblyInfo.cs
+D:\C#\WebApi\WebApiBook\obj\Debug\net6.0\WebApiBook.MvcApplicationPartsAssemblyInfo.cache

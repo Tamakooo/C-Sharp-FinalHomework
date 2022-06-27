@@ -1,0 +1,15 @@
+D:\C#\WebApi\MyBBSWebApi.DAL\bin\Debug\net6.0\MyBBSWebApi.DAL.deps.json
+D:\C#\WebApi\MyBBSWebApi.DAL\bin\Debug\net6.0\MyBBSWebApi.DAL.dll
+D:\C#\WebApi\MyBBSWebApi.DAL\bin\Debug\net6.0\MyBBSWebApi.DAL.pdb
+D:\C#\WebApi\MyBBSWebApi.DAL\bin\Debug\net6.0\MyBBSWebApi.Models.dll
+D:\C#\WebApi\MyBBSWebApi.DAL\bin\Debug\net6.0\MyBBSWebApi.Models.pdb
+D:\C#\WebApi\MyBBSWebApi.DAL\obj\Debug\net6.0\MyBBSWebApi.DAL.csproj.AssemblyReference.cache
+D:\C#\WebApi\MyBBSWebApi.DAL\obj\Debug\net6.0\MyBBSWebApi.DAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\C#\WebApi\MyBBSWebApi.DAL\obj\Debug\net6.0\MyBBSWebApi.DAL.AssemblyInfoInputs.cache
+D:\C#\WebApi\MyBBSWebApi.DAL\obj\Debug\net6.0\MyBBSWebApi.DAL.AssemblyInfo.cs
+D:\C#\WebApi\MyBBSWebApi.DAL\obj\Debug\net6.0\MyBBSWebApi.DAL.csproj.CoreCompileInputs.cache
+D:\C#\WebApi\MyBBSWebApi.DAL\obj\Debug\net6.0\MyBBSWebApi.DAL.csproj.CopyComplete
+D:\C#\WebApi\MyBBSWebApi.DAL\obj\Debug\net6.0\MyBBSWebApi.DAL.dll
+D:\C#\WebApi\MyBBSWebApi.DAL\obj\Debug\net6.0\refint\MyBBSWebApi.DAL.dll
+D:\C#\WebApi\MyBBSWebApi.DAL\obj\Debug\net6.0\MyBBSWebApi.DAL.pdb
+D:\C#\WebApi\MyBBSWebApi.DAL\obj\Debug\net6.0\ref\MyBBSWebApi.DAL.dll

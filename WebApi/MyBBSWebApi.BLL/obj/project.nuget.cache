@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "YB+b3Qo4zRp4iGsJ3CMUGYBsuabyjOkwHBfE/rko1wa4GrXD15kWPqgNH2PYP7NzdGw0I+5TPFQlI6QqUpxm4A==",
+  "success": true,
+  "projectFilePath": "D:\\C#\\WebApi\\MyBBSWebApi.BLL\\MyBBSWebApi.BLL.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\陈子豪\\.nuget\\packages\\mysqlconnector\\2.1.9\\mysqlconnector.2.1.9.nupkg.sha512"
+  ],
+  "logs": []
+}
